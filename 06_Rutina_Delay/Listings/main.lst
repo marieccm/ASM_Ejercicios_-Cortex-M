@@ -1,0 +1,79 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             codigo, CODE, READONLY, ALIGN=2
+    2 00000000                 THUMB
+    3 00000000                 EXPORT           Start
+    4 00000000         
+    5 00000000         Start
+    6 00000000 F04F 0000       LDR              R0, =0
+    7 00000004 4904            LDR              R1, =2000000
+    8 00000006         
+    9 00000006         Delay
+   10 00000006 F100 0001       ADD              R0, #1      ; Sumar 1 al valor 
+                                                            anterior de R0.
+   11 0000000A BF00            NOP
+   12 0000000C BF00            NOP
+   13 0000000E BF00            NOP
+   14 00000010 BF00            NOP
+   15 00000012         
+   16 00000012 4288            CMP              R0, R1      ; Comparar R0 con c
+                                                            onstante.
+   17 00000014 D1F7            BNE              Delay       ; Si R0!=2000000 re
+                                                            petir subrutina Del
+                                                            ay.
+   18 00000016         
+   19 00000016         Loop
+   20 00000016 E7FE            B                Loop        ; Ciclo sin salida
+   21 00000018         
+   22 00000018                 ALIGN
+   23 00000018                 END
+              001E8480 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\Keil
+_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\CMSIS\
+Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 525" --
+predefine="TM4C123GH6PM SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Delay 00000006
+
+Symbol: Delay
+   Definitions
+      At line 9 in file main.s
+   Uses
+      At line 17 in file main.s
+Comment: Delay used once
+Loop 00000016
+
+Symbol: Loop
+   Definitions
+      At line 19 in file main.s
+   Uses
+      At line 20 in file main.s
+Comment: Loop used once
+Start 00000000
+
+Symbol: Start
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 3 in file main.s
+Comment: Start used once
+codigo 00000000
+
+Symbol: codigo
+   Definitions
+      At line 1 in file main.s
+   Uses
+      None
+Comment: codigo unused
+4 symbols
+340 symbols in table

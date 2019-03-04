@@ -1,0 +1,62 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             codigo, CODE, READONLY,ALIGN=2
+    2 00000000                 THUMB
+    3 00000000                 EXPORT           Start
+    4 00000000         
+    5 00000000         Start                                ; Punto de entrada 
+                                                            a partir del archiv
+                                                            o Startup.
+    6 00000000         
+    7 00000000         ; Para enteros de hasta 12 bits o de la forma de segundo
+                        operador flexible.
+    8 00000000 F640 72FF       MOV              R2, #4095
+    9 00000004 F06F 0362       MOV              R3, #-99
+   10 00000008 F640 74FF       MOV              R4, #0XFFF
+   11 0000000C F04F 3501       MOV              R5, #0x01010101
+   12 00000010 F06F 2611       MVN              R6, #0x11001100 ; Escribe 0xFEE
+                                                            EFEFE.
+   13 00000014         ; Para enteros de hasta 32 bits.
+   14 00000014 F64F 57FD       MOVW             R7, #0xFDFD ; Bits menos signif
+                                                            icativos de R7.
+   15 00000018 F6CC 37CB       MOVT             R7, #0xCBCB ; Bits más signific
+                                                            ativos de R7.
+   16 0000001C F64A 28AA 
+              F6CA 28AA        MOV32            R8, #2863311530
+   17 00000024         
+   18 00000024                 ALIGN
+   19 00000024                 END                          ; Final del program
+                                                            a.
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\Keil
+_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\CMSIS\
+Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 525" --
+predefine="TM4C123GH6PM SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Start 00000000
+
+Symbol: Start
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 3 in file main.s
+Comment: Start used once
+codigo 00000000
+
+Symbol: codigo
+   Definitions
+      At line 1 in file main.s
+   Uses
+      None
+Comment: codigo unused
+2 symbols
+336 symbols in table

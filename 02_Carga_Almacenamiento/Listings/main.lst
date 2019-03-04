@@ -1,0 +1,82 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000 20000008 
+                       DIRECCION
+                               EQU              0x20000008
+    2 00000000         
+    3 00000000                 AREA             codigo, CODE, READONLY,ALIGN=2
+    4 00000000                 THUMB
+    5 00000000                 EXPORT           Start
+    6 00000000         
+    7 00000000         Start                                ; Punto de entrada 
+                                                            a partir del archiv
+                                                            o Startup.
+    8 00000000 F240 0108 
+              F2C2 0100        MOV32            R1, DIRECCION
+    9 00000008         
+   10 00000008 4A0A            LDR              R2, = 108900
+   11 0000000A F243 0339       LDR              R3, = 12345
+   12 0000000E F44F 54FA       LDR              R4, = 8000
+   13 00000012 F44F 753C       LDR              R5, = 752
+   14 00000016         
+   15 00000016 F841 2B04       STR              R2, [R1], #4
+   16 0000001A F841 3B04       STR              R3, [R1], #4
+   17 0000001E E881 0030       STM              R1, {R4, R5}
+   18 00000022 F240 0108 
+              F2C2 0100        MOV32            R1, DIRECCION
+   19 0000002A E8B1 01C0       LDM              R1!,{R6,R7,R8}
+   20 0000002E F8D1 9000       LDR              R9, [R1]
+   21 00000032         
+   22 00000032 00 00           ALIGN
+   23 00000034         
+   24 00000034                 END
+              0001A964 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\Keil
+_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\CMSIS\
+Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 525" --
+predefine="TM4C123GH6PM SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Start 00000000
+
+Symbol: Start
+   Definitions
+      At line 7 in file main.s
+   Uses
+      At line 5 in file main.s
+Comment: Start used once
+codigo 00000000
+
+Symbol: codigo
+   Definitions
+      At line 3 in file main.s
+   Uses
+      None
+Comment: codigo unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+DIRECCION 20000008
+
+Symbol: DIRECCION
+   Definitions
+      At line 1 in file main.s
+   Uses
+      At line 8 in file main.s
+      At line 18 in file main.s
+
+1 symbol
+339 symbols in table

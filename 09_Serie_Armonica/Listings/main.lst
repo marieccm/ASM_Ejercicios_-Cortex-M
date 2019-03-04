@@ -1,0 +1,142 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             codigo, CODE, READONLY, ALIGN=2
+    2 00000000                 THUMB
+    3 00000000                 EXPORT           Start
+    4 00000000         
+    5 00000000         Start                                ; Punto de inicio d
+                                                            e programa.
+    6 00000000 EEB2 0A00       VLDR.F32         S0, =8      ; Valor de x.
+    7 00000004 EDDF 0A18       VLDR.F32         S1, =50     ; Límite superior.
+    8 00000008         
+    9 00000008 EEB7 1A00       VLDR.F32         S2, =1      ; Constante 1.
+   10 0000000C EEF0 1A00       VLDR.F32         S3, =2      ; Constante 2.
+   11 00000010         
+   12 00000010 EEBF 2A00       VLDR.F32         S4, =-1     ; Valor de n.
+   13 00000014         
+   14 00000014         Factor_K                             ; Cálculo de K en S
+                                                            13.
+   15 00000014 EE20 5A00       VMUL.F32         S10, S0, S0 ; x^2
+   16 00000018 EE75 5A41       VSUB.F32         S11, S10, S2 ; (x^2)-1
+   17 0000001C EE35 6A01       VADD.F32         S12, S10, S2 ; (x^2)+1
+   18 00000020 EEC5 6A86       VDIV.F32         S13, S11, S12 ; K=((x^2)-1)/((x
+                                                            ^2)+1)
+   19 00000024         
+   20 00000024         Sumatoria                            ; Ciclo de sumatori
+                                                            a.
+   21 00000024 EE32 2A01       VADD.F32         S4, S2      ; n+1
+   22 00000028 EE21 AA82       VMUL.F32         S20, S3, S4 ; 2*n
+   23 0000002C EE3A AA01       VADD.F32         S20, S2     ; 2n+1
+   24 00000030 EEC1 AA0A       VDIV.F32         S21, S2, S20 ; a=1/(2n+1)
+   25 00000034         
+   26 00000034 ED9F BA0D       VLDR.F32         S22, =0     ; Contador subrutin
+                                                            a Potencia.
+   27 00000038 EEF7 BA00       VLDR.F32         S23, =1     ; S23 contendrá el 
+                                                            valor de la potenci
+                                                            a.
+   28 0000003C F000 F80A       BL               Potencia    ; b=K^(2n+1), BL: "
+                                                            branch with link".
+   29 00000040 EE2B CAAA       VMUL.F32         S24, S23, S21 ;a*b
+   30 00000044 EE3F FA0C       VADD.F32         S30, S24    ; Acumulado de suma
+                                                            toria en S30.
+   31 00000048 EEB4 2A60       VCMP.F32         S4, S1      ; Verificar si n ha
+                                                             llegado a límite s
+                                                            uperior.
+   32 0000004C EEF1 FA10       VMRS             APSR_nzcv, FPSCR
+   33 00000050 D3E8            BLO              Sumatoria   ; Sufijo LO signifi
+                                                            ca "menor".
+   34 00000052         
+   35 00000052         Loop                                 ; Ciclo infinito.
+   36 00000052 E7FE            B                Loop
+   37 00000054         
+   38 00000054         Potencia                             ; Subrutina para cá
+                                                            lculo de potencia.
+   39 00000054 EE6B BAA6       VMUL.F32         S23, S13
+   40 00000058 EE3B BA01       VADD.F32         S22, S2
+   41 0000005C EEB4 BA4A       VCMP.F32         S22, S20    ; Verificar si cont
+                                                            ador es igual a exp
+                                                            onente.
+   42 00000060 EEF1 FA10       VMRS             APSR_nzcv, FPSCR
+   43 00000064 D1F6            BNE              Potencia    ; Si no se ha termi
+                                                            nado, continuar cal
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                                                            culando.
+   44 00000066 4770            BX               LR          ; Volver a línea si
+                                                            guiente a BL usado.
+                                                            
+   45 00000068         
+   46 00000068                 ALIGN
+   47 00000068                 END
+              42480000 
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\Keil
+_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\CMSIS\
+Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 525" --
+predefine="TM4C123GH6PM SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Factor_K 00000014
+
+Symbol: Factor_K
+   Definitions
+      At line 14 in file main.s
+   Uses
+      None
+Comment: Factor_K unused
+Loop 00000052
+
+Symbol: Loop
+   Definitions
+      At line 35 in file main.s
+   Uses
+      At line 36 in file main.s
+Comment: Loop used once
+Potencia 00000054
+
+Symbol: Potencia
+   Definitions
+      At line 38 in file main.s
+   Uses
+      At line 28 in file main.s
+      At line 43 in file main.s
+
+Start 00000000
+
+Symbol: Start
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 3 in file main.s
+Comment: Start used once
+Sumatoria 00000024
+
+Symbol: Sumatoria
+   Definitions
+      At line 20 in file main.s
+   Uses
+      At line 33 in file main.s
+Comment: Sumatoria used once
+codigo 00000000
+
+Symbol: codigo
+   Definitions
+      At line 1 in file main.s
+   Uses
+      None
+Comment: codigo unused
+6 symbols
+342 symbols in table

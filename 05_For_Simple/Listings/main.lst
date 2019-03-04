@@ -1,0 +1,76 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             codigo, CODE, READONLY, ALIGN=2
+    2 00000000                 THUMB
+    3 00000000                 EXPORT           Start
+    4 00000000         
+    5 00000000         Start
+    6 00000000 F04F 0000       LDR              R0, =0
+    7 00000004         
+    8 00000004         Sumar
+    9 00000004 F100 0005       ADD              R0, #5      ; Sumar 5 al valor 
+                                                            anterior de R0.
+   10 00000008         
+   11 00000008 281E            CMP              R0, #30     ; Comparar R0 con c
+                                                            onstante 30.
+   12 0000000A DC00            BGT              Loop        ; Si R0>30 salir de
+                                                            l ciclo.
+   13 0000000C E7FA            B                Sumar       ; Se llegará a esta
+                                                             línea sólo si R0<=
+                                                            30
+   14 0000000E         
+   15 0000000E         Loop
+   16 0000000E E7FE            B                Loop        ; Ciclo sin salida
+   17 00000010         
+   18 00000010                 ALIGN
+   19 00000010                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\Keil
+_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\CMSIS\
+Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 525" --
+predefine="TM4C123GH6PM SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Loop 0000000E
+
+Symbol: Loop
+   Definitions
+      At line 15 in file main.s
+   Uses
+      At line 12 in file main.s
+      At line 16 in file main.s
+
+Start 00000000
+
+Symbol: Start
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 3 in file main.s
+Comment: Start used once
+Sumar 00000004
+
+Symbol: Sumar
+   Definitions
+      At line 8 in file main.s
+   Uses
+      At line 13 in file main.s
+Comment: Sumar used once
+codigo 00000000
+
+Symbol: codigo
+   Definitions
+      At line 1 in file main.s
+   Uses
+      None
+Comment: codigo unused
+4 symbols
+338 symbols in table

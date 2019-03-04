@@ -1,0 +1,74 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             codigo, CODE, READONLY,ALIGN=2
+    2 00000000                 THUMB
+    3 00000000                 EXPORT           Start
+    4 00000000         
+    5 00000000         Start
+    6 00000000 EEB7 0A00       VLDR.F32         S0, =1
+    7 00000004 EEF7 0A00       VLDR.F32         S1, =1
+    8 00000008 ED9F 2A06       VLDR.F32         S4, =50
+    9 0000000C         
+   10 0000000C         Sumatoria
+   11 0000000C EE80 1A80       VDIV.F32         S2, S1, S0
+   12 00000010 EE71 1A81       VADD.F32         S3, S2
+   13 00000014 EE30 0A20       VADD.F32         S0, S1
+   14 00000018 EEB4 0A42       VCMP.F32         S0, S4
+   15 0000001C EEF1 FA10       VMRS             APSR_nzcv, FPSCR
+   16 00000020 D3F4            BLO              Sumatoria
+   17 00000022         
+   18 00000022         Loop
+   19 00000022 E7FE            B                Loop
+   20 00000024         
+   21 00000024                 ALIGN
+   22 00000024                 END
+              42480000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Target_1 -IC:\Keil
+_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123 -IC:\Keil_v5\ARM\CMSIS\
+Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 525" --
+predefine="TM4C123GH6PM SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Loop 00000022
+
+Symbol: Loop
+   Definitions
+      At line 18 in file main.s
+   Uses
+      At line 19 in file main.s
+Comment: Loop used once
+Start 00000000
+
+Symbol: Start
+   Definitions
+      At line 5 in file main.s
+   Uses
+      At line 3 in file main.s
+Comment: Start used once
+Sumatoria 0000000C
+
+Symbol: Sumatoria
+   Definitions
+      At line 10 in file main.s
+   Uses
+      At line 16 in file main.s
+Comment: Sumatoria used once
+codigo 00000000
+
+Symbol: codigo
+   Definitions
+      At line 1 in file main.s
+   Uses
+      None
+Comment: codigo unused
+4 symbols
+340 symbols in table
